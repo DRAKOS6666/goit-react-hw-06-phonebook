@@ -6,10 +6,15 @@ function ContactListItem({ contact, onClickDelete }) {
   const { id, name, number } = contact;
   return (
     <>
-      {name}: {number}
+      <span className="contactName">
+        {name}: {number}
+      </span>
       <button className="deleteContactBtn" onClick={() => onClickDelete(id)}>
         Delete
       </button>
+      <a className="callRef" href={'tel:' + number}>
+        Call
+      </a>
     </>
   );
 }

@@ -4,40 +4,22 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../redux/contacts/contacts-actions';
 
-function Filter({ contacts, findContact }) {
-  const filteredContacts = contacts.items.filter(contact => {
-    if (contact.name) {
-      return contact.name.toLowerCase().includes(contacts.filter);
-    }
-  });
-
-  const numberOfContacts =
-    filteredContacts.length < contacts.length && filteredContacts.length !== 0
-      ? filteredContacts.length
-      : null;
-
+function Filter({ findContact }) {
   const findContactQuery = event =>
     findContact(event.target.value.toLowerCase());
 
   return (
     <label>
       Find contacts by name:
-      <input type="text" onChange={findContactQuery} />
-      {numberOfContacts && <h3>Was finded {numberOfContacts} contact(s)</h3>}
+      <input type="search" autoComplete="on" onChange={findContactQuery} />
     </label>
   );
 }
 
-Filter.propTypes = {
-  onFindItem: propTypes.func.isRequired,
-  numberOfContacts: propTypes.oneOfType([propTypes.object, propTypes.number]),
-};
-
-const mapStateToProps = state => {
-  return {
-    contacts: state.contacts,
-  };
-};
+// Filter.propTypes = {
+//   onFindItem: propTypes.func.isRequired,
+//   numberOfContacts: propTypes.oneOfType([propTypes.object, propTypes.number]),
+// };
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -45,4 +27,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(null, mapDispatchToProps)(Filter);

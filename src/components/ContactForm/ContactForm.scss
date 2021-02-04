@@ -1,9 +1,16 @@
+@import '../App/App.scss';
 .submitBtn {
-  width: 120px;
+  min-width: 150px;
   height: 35px;
-  background-color: lightblue;
+  background-color: $accent-color;
   box-shadow: 1px 1px 4px black;
   margin: 0 auto;
   font-weight: bold;
   border-radius: 5px;
+}
+
+.formWrapper {
+  background-color: $primary-color;
+  padding: 20px;
+  border-radius: 10px;
 }

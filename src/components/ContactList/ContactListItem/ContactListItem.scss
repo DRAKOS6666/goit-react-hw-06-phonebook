@@ -1,7 +1,42 @@
+@import '../../App/App.scss';
+
+.contactListItem {
+  &:hover {
+    background-color: $light-primary-color;
+    color: $primary-text;
+    border-radius: 5px;
+  }
+}
+
 .deleteContactBtn {
   margin-left: 5px;
+  margin-right: 5px;
   width: 50px;
-  background-color: cyan;
+  background-color: $accent-color;
   box-shadow: 2px 2px 4px black;
   align-self: center;
+  cursor: pointer;
+}
+
+.contactName {
+  flex-grow: 2;
+  color: $primary-text;
+}
+
+.callRef {
+  visibility: hidden;
+  text-decoration: none;
+  color: $secondary-text;
+
+  &::after {
+    visibility: visible;
+    content: url('../../../icons/phone-call.svg');
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 5px;
+  }
+  &:hover {
+    visibility: visible;
+  }
 }

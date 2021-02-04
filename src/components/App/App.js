@@ -9,8 +9,6 @@ import * as actions from '../../redux/contacts/contacts-actions';
 
 import './App.scss';
 
-// console.log(state.getState());
-
 function App({
   contacts,
   filter,
@@ -35,9 +33,6 @@ function App({
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  // const findContactQuery = event =>
-  //   findContact(event.target.value.toLowerCase());
-
   const isUnique = name => !contacts.some(contact => contact.name === name);
 
   const createContact = ({ name, number }) => {
@@ -51,33 +46,20 @@ function App({
     }
   };
 
-  // const filteredContacts = contacts.filter(contact => {
-  //   if (contact.name) {
-  //     return contact.name.toLowerCase().includes(filter);
-  //   }
-  // });
-
-  // const numberOfContacts =
-  //   filteredContacts.length < contacts.length && filteredContacts.length !== 0
-  //     ? filteredContacts.length
-  //     : null;
-
   return (
     <div className="wrapper">
       <h1>Phonebook</h1>
       <ContactForm addContact={createContact} />
 
-      <h2>Contacts ({contacts.length})</h2>
+      <h2>
+        Contacts: <span className="contactsTittle">{contacts.length}</span>
+      </h2>
       {contacts.length > 0 ? (
         <>
-          <Filter
-          // onFindItem={findContactQuery}
-          // numberOfContacts={numberOfContacts}
-          />
-          <ContactList
-          // contacts={filteredContacts}
-          // deleteContact={deleteContact}
-          />
+          <Filter />
+          <div className="contactListWrapper">
+            <ContactList />
+          </div>
         </>
       ) : (
         <h3>Please add contacts...</h3>
