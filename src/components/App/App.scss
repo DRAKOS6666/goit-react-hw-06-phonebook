@@ -1,3 +1,4 @@
+@import './styleVariables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
 
 * {
@@ -5,15 +6,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-$primary-color: #4caf50;
-$dark-primary-color: #388e3c;
-$light-primary-color: #c8e6c9;
-$text-icons-color: #ffffff;
-$accent-color: #ff9800;
-$divider-color: #bdbdbd;
-$primary-text: #212121;
-$secondary-text: #757575;
 
 html {
   background-color: $light-primary-color;
