@@ -80,11 +80,6 @@ module.exports = function (webpackEnv) {
           : {},
       },
       {
-        test: /\.scss$/,
-        include: paths.appSrc,
-        loaders: ['style', 'css', 'sass'],
-      },
-      {
         loader: require.resolve('css-loader'),
         options: cssOptions,
       },
