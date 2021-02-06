@@ -33,7 +33,7 @@ const middleware = [
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  logger,
+  process.env.NODE_ENV === 'development' && logger,
 ];
 
 const store = configureStore({
