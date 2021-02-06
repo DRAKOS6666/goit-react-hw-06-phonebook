@@ -21,20 +21,23 @@ import contactsReducer from './contacts/contacts-reducer';
 
 // const store = createStore(rootReducer, composeWithDevTools());
 
-const persistContactsConfig = {
-  key: 'contacts',
-  storage,
-  blacklist: ['filter'],
-};
-
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  process.env.NODE_ENV === 'development' && logger,
 ];
+
+if (process.env.NODE_ENV === `development`) {
+  middleware.push(logger);
+}
+
+const persistContactsConfig = {
+  key: 'contacts',
+  storage,
+  blacklist: ['filter'],
+};
 
 const store = configureStore({
   reducer: {
