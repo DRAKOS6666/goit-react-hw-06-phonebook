@@ -9,9 +9,17 @@
 
 .contactListItem {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: baseline;
   padding: 3px;
   border-bottom: 1px solid $divider-color;
+
+  &:hover {
+    background-color: $light-primary-color;
+    color: $primary-text;
+    border-radius: 5px;
+  }
 }
 
 .findedTittle {

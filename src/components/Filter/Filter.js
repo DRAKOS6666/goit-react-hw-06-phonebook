@@ -1,25 +1,24 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as actions from '../../redux/contacts/contacts-actions';
 
 function Filter({ findContact }) {
-  const findContactQuery = event =>
-    findContact(event.target.value.toLowerCase());
+  const findContactQuery = ({ target }) =>
+    findContact(target.value.toLowerCase());
 
   return (
     <label>
-      Find contacts by name:
-      <input type="search" autoComplete="on" onChange={findContactQuery} />
+      Find contacts:
+      <input
+        placeholder="Enter a part of name or nubmer"
+        type="search"
+        autoComplete="on"
+        onChange={findContactQuery}
+      />
     </label>
   );
 }
-
-// Filter.propTypes = {
-//   onFindItem: propTypes.func.isRequired,
-//   numberOfContacts: propTypes.oneOfType([propTypes.object, propTypes.number]),
-// };
 
 const mapDispatchToProps = dispatch => {
   return {

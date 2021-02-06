@@ -1,28 +1,43 @@
 import React, { useState } from 'react';
-import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import * as actions from '../../redux/contacts/contacts-actions';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import 'react-phone-number-input/style.css';
+import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
+
 import './ContactForm.scss';
 
-function ContactForm({ addContact }) {
+function ContactForm({ addContact, contacts }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const handleInputChange = ({ target: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
+  let errorMessage;
+  const setError = errorText => {
+    errorMessage = errorText;
+  };
 
-      default:
-        break;
-    }
+  const isUnique = name => !contacts.some(contact => contact.name === name);
+
+  const handleNameChange = e => {
+    setName(e.target.value.trim());
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    addContact({ name, number });
+    if (errorMessage) {
+      toast.error(errorMessage);
+      return;
+    }
+    if (!isUnique(name)) {
+      toast.warn(`${name} is already in contact`);
+      return;
+    }
+    addContact(name, number);
+    toast('Contact successfully added.');
     setName('');
     setNumber('');
     event.target.reset();
@@ -34,30 +49,49 @@ function ContactForm({ addContact }) {
         <label>
           Name:
           <input
-            name="name"
-            className="formInput"
+            placeholder="Enter contact name"
+            tabIndex="1"
+            autoFocus
+            required
+            className="nameInput"
             type="text"
-            onChange={handleInputChange}
+            onChange={handleNameChange}
           />
         </label>
         <label>
           Phone Number:
-          <input
-            required
-            name="number"
-            className="formInput"
-            type="number"
-            onChange={handleInputChange}
+          <PhoneInput
+            tabIndex="2"
+            international
+            placeholder="Enter number"
+            value={number}
+            onChange={setNumber}
+            error={
+              number
+                ? isPossiblePhoneNumber(number)
+                  ? undefined
+                  : setError('Invalid phone number')
+                : setError('Phone number required')
+            }
           />
         </label>
-        <input className="submitBtn" type="submit" value="Add contact" />
+        <input className="submitBtn" type="submit" value="ADD CONTACT" />
       </form>
     </div>
   );
 }
 
-ContactForm.propTypes = {
-  addContact: propTypes.func.isRequired,
+const mapStateToProps = state => {
+  return {
+    contacts: state.contacts.items,
+  };
 };
 
-export default ContactForm;
+const mapDispatchToProps = dispatch => {
+  return {
+    addContact: (name, number) =>
+      dispatch(actions.addContact({ name, number })),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

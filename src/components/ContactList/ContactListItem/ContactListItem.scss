@@ -1,34 +1,52 @@
 @import '../../App/App.scss';
 
-.contactListItem {
-  &:hover {
-    background-color: $light-primary-color;
-    color: $primary-text;
-    border-radius: 5px;
-  }
-}
-
 .deleteContactBtn {
-  margin-left: 5px;
-  margin-right: 5px;
+  // margin-left: 5px;
   width: 50px;
-  background-color: $accent-color;
-  box-shadow: 2px 2px 4px black;
+  height: 25px;
   align-self: center;
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $light-primary-color;
+  background-color: #f44336;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px black;
   cursor: pointer;
 }
 
 .contactName {
+  display: block;
+  padding-right: 4px;
   flex-grow: 2;
   color: $primary-text;
+
+  @media screen and (max-width: 1600px) {
+    display: block;
+    width: 100%;
+  }
+}
+
+.contactNumber {
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.buttonsWrapper {
+  // width: 30%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  text-align: center;
 }
 
 .callRef {
   visibility: hidden;
   text-decoration: none;
   color: $secondary-text;
+  margin-right: 3px;
 
-  &::after {
+  &::before {
     visibility: visible;
     content: url('../../../icons/phone-call.svg');
     width: 20px;
